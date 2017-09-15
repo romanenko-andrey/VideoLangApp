@@ -1,0 +1,37 @@
+<div class="container">
+  <div class="panel panel-default">
+    <div class="panel-heading">ВИДЕО</div>
+    <div class="panel-body">
+      <div class="video-wrapper" >        
+        <div class="video-slide-wrapper" ng-repeat="video in videos">
+          <h3>{{video.title}}.</h3>
+          <h4>{{video.sub_title}}.</h4>
+          <a class="video-poster" href="#/video/{{video._id}}" style="background: url('{{video.posters[0]}}') no-repeat 50% 0;"> 
+            <div class = "wraper_text_into_poster">
+             <p class="text_into_poster">
+                {{video.about}}
+                <p><i class="ion-star"></i> 
+                {{video.rating}} stars
+                <i class="ion-ios-videocam"></i> 
+                {{video.type}}
+                <i class="ion-ios-calendar"></i> 
+                {{video.year}}
+               
+                <i class="ion-information-circled"></i> 
+                {{video.length}}
+                </p>
+             </p>
+            </div>
+          </a>
+        </div>
+    </div>
+      
+    </div>
+   
+  </div>
+</div>
+<div class="text-center">
+  <a class="btn btn-default" href="#"><i class="ion-home"></i> В начало </a>
+  <a class="btn btn-default" href="#"><i class="ion-bug"></i> Report issue</a>
+</div>
+</div>

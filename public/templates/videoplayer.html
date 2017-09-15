@@ -1,0 +1,225 @@
+
+<div class="container">
+
+    
+<div class= "videogular-container-left">
+    
+</div>  
+  
+<div  class= "videogular-container-center"> 
+
+  <h3>{{videoContent.title}}. {{videoContent.sub_title}}.</h3>
+  
+   
+  <div id="videogular-wrapper">
+   
+   <videogular 
+      vg-theme="config.theme"
+      vg-player-ready="onPlayerReady($API)" 
+      vg-complete="onCompleteVideo()"
+	  vg-update-state="onUpdateState">
+   
+    <vg-media vg-src="config.sources"
+            vg-tracks="config.tracks"
+            vg-audio="config.audio"
+            vg-native-controls="false">
+    </vg-media>
+    
+    <vg-buffering></vg-buffering>
+     
+    <vg-controls vg-autohide="config.autoHide" vg-autohide-time="config.autoHideTime">
+        <vg-play-pause-button></vg-play-pause-button>
+      
+        <vg-time-display>{{ currentTime | date:'mm:ss' }}</vg-time-display>
+      
+        <vg-scrub-bar>
+            <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
+            <vg-scrub-bar-buffer></vg-scrub-bar-buffer>
+        </vg-scrub-bar>
+      
+        <vg-time-display>{{ timeLeft | date:'mm:ss' }}</vg-time-display>
+      
+       <vg-volume>
+          <vg-volume-bar></vg-volume-bar>
+          <vg-mute-button></vg-mute-button>
+        </vg-volume>
+<!--      
+<vg-scrub-bar>
+    <vg-scrub-bar-current-time> </vg-scrub-bar-current-time>
+    <vg-cuepoints 
+      vg-cuepoints-config="config.plugins.cuepoints"
+      vg-cuepoints-theme="config.plugins.cuepoints.theme.url">
+    </vg-cuepoints>
+</vg-scrub-bar>
+
+<my-stop-button class='iconButton' ng-click='API.stop()'></my-stop-button>
+-->    
+     
+      <my-help-select></my-help-select>  
+  <!-- встроенная функция узменения скорости воспроизведения 0,5 1 1,5 2    
+      <vg-playback-button></vg-playback-button>
+  -->
+      <my-titles-select></my-titles-select>
+        
+      <vg-fullscreen-button></vg-fullscreen-button>
+    
+    </vg-controls>
+     
+    <vg-show-about-screen> Show About </vg-show-about-screen>  
+    
+    <vg-show-speedrate></vg-show-speedrate>
+      
+    <vg-overlay-play></vg-overlay-play>
+     
+	<vg-poster vg-url='config.plugins.poster'></vg-poster>
+       
+   </videogular>
+
+    
+    
+    <!-- текст титров выводится сюда -->
+   <div class="titles-wrapper">
+        <div class="text-titles">
+          <ul id="my-track">
+            <li ng-repeat="track in config.tracks" id="{{'my-track-'+track.srclang}}" class={{"one-track-"+$index}} ng-show= isTitleHidden[$index].show data-lang="{{track.srclang}}">  {{track.label}}</li>
+          </ul>
+        </div>
+    </div>
+    
+    <!--- выпадающий список доступных титров --->
+   <div id="my-titles-list" ng-show=showTitleList>
+        <li ng-repeat="track in config.tracks" ng-click = "showTitle($index)" ng-class="{myTitleStyle : isTitleHidden[$index].show}">
+          {{track.srclang}} {{isTitleHidden[$index].str}}
+        </li>
+      </ul>
+   </div>
+  
+  
+  <div id="translate-box" class="panel panel-default"  ng-show=translateBook.visible||trModal ></translate-bo> 
+        <div class="panel-heading">
+          <span id="tr-header-text">Результат перевода</span>
+          <i class="ion-close" ng-click="closeTrModal()"></i> 
+        </div>
+    
+        <div class="panel-body">
+          <div class="tr tr-from"> 
+              <input name="text-from" type="text" class="text-from" value={{translateBook.outText}}>
+              
+          </div>
+         
+          <div class="tr-full-info">
+            
+              <div class="tr tr-direction clearfix">
+                  <span>
+                    [ <b>{{translateBook.fromLang}}</b> 
+                    <i class="ion-arrow-right-c"></i>
+                      <b>
+                      <select class="lang-change" name="langs" ng-mouseup="changeLanguage($event)">
+                        <option class="current-option" value={{translateBook.toLang}} ng-selected>{{translateBook.toLang}}</option>
+                        
+                        <option ng-repeat="lang in languages" value={{lang}}>{{lang}}
+                        </option>
+                        
+                      </select>
+                      </b> ]
+                  </span>
+                
+                  <div class="retranslate-button">
+                     <button class="btn btn-success btn-sm ion-volume-medium" ng-click="speak()" ng-show=canSpeak></button>
+                     <button class="btn btn-sm" ng-click="reTranslateFast()">Фраза</button>
+                     <button class="btn btn-sm" ng-click="reTranslateFull()">Слово</button>
+                  
+                  </div>
+              </div>
+
+              <div class="tr tr-to">  
+                 <input name="text-to" type="text" class="text-to" value={{translateBook.translateText}}>
+              </div>
+              
+              <p ng-show=translateBook.tr>
+                Транскрипция: [<b>{{translateBook.tr}}</b>]
+              </p>
+              <ul>
+                  <li ng-repeat="article in translateBook.translatedText">
+                    <b>{{article.pos}}</b>
+                    <ul>
+                      <li class="li-with-no-style" ng-repeat="text in article.rez">
+                        <input type="checkbox" name={{"article"+$index}} value={{text}}> {{text}}
+                      </li>
+                    </ul>  
+                  </li>
+              </ul>
+            
+              <a href="https://tech.yandex.ru/dictionary/">
+                 «Переведено сервисом «Яндекс.Переводчик»</a>
+           </div>
+        </div>
+      
+        <div class="panel-footer"> <!--  ng-show=trModal> -->
+        
+          <div class="btn-group">
+            <button class="btn btn-success btn-sm" ng-click="addToDict()">Добавить в словарь</button>
+            <button class="btn btn-default btn-sm" ng-click="closeTrModal()">Закрыть</button>
+          </div>  
+        </div>
+        <div id="box-pointer"></div>
+   </div> <!-- translate-box-->
+   
+   <div id="mouseXY"></div>
+  
+    <div id="help-player-window" ng-show=showHelp ng-click="showHelp=false">
+      <h4>Управляющие клавиши видеоплейера:</h4>
+      <p class="item">
+        <span class="function">"Пробел"</span> 
+        <span class="description">Пауза / Воспроизведение</span>  
+      </p>
+      <p class="item">
+        <span class="function">"Стрелка влево"</span> 
+        <span class="description">прокрутить видео назад на 5 с</span>  
+      </p>
+      <p class="item">
+        <span class="function">"Стрелка вправо"</span> 
+        <span class="description">прокрутить видео вперед на 5 с</span>  
+      </p>
+      <p class="item">
+        <span class="function">Shift + "стрелка вправо"</span> 
+        <span class="description">увеличить скорость воспроизведения на 10%</span>  
+      </p>
+      <p class="item">
+        <span class="function">Shift + "стрелка влево"</span> 
+        <span class="description">уменьшить скорость воспроизведения на 10%</span>  
+      </p>
+      <p class="item">
+        <span class="function">Shift + "пробел"</span> 
+        <span class="description">нормализовать скорость воспроизведения</span>  
+      </p>
+       <p>Управление сдвигом текста активных треков относительно видео:</p>
+       <p class="item">
+        <span class="function">CTRL + "стрелка вправо"</span> 
+        <span class="description">cдвинуть время активных треков вперед</span>  
+      </p>
+       <p class="item">
+        <span class="function">CTRL + "стрелка влево"</span> 
+        <span class="description">cдвинуть время активных треков назад</span>  
+      </p>
+    </div>
+  
+  </div>
+
+  
+
+</div>  <!--  "videogular-container"> -->
+
+
+<div class= "videogular-container-right">
+    
+</div>  
+
+</div>
+<!--  
+<audio id='audio1' controls mediagroup="a11">
+    <source src=“video/PaoloCardini_2012G.en.mp3” type=”audio/mp3”>
+</audio>  
+-->
+
+

@@ -1,0 +1,410 @@
+::cue {
+    color: yellow;
+}
+
+.video-slide-wrapper {
+   display: inline-block;
+   width: 33%;
+   padding:5px;
+}
+
+.video-poster{
+  width: 100%;
+  height: 200px;
+  display:block;
+  text-decoration: none
+  
+}
+
+.wraper_text_into_poster{
+  width:100%;
+  height:100%;
+  padding:10px;
+  position:relative;
+  overflow: hidden
+}
+
+.wraper_text_into_poster:hover {
+   background-color: rgba(100,100,100,0.5); 
+}
+
+
+.text_into_poster{color: white; line-height: 1.5em; position: absolute; bottom: 20px; left: 20px; opacity:0; transition: all 0.8s;   text-shadow: 2px 2px 2px black; text-align: left;
+transform: translate(0, 100px);}
+
+.wraper_text_into_poster:hover .text_into_poster{opacity:1; transform: translate(0, 0);}
+
+
+@media screen and (max-width:1180px){
+  .video-slide-wrapper {
+      width: 50%;
+  }
+}
+
+@media screen and (max-width:640px){
+  .video-slide-wrapper {
+      width: 100%;
+  }
+}
+
+videogular {
+   box-shadow: 0 10px 70px 4px rgba(0, 0, 0, 0.56);
+}
+
+videogular vg-volume-bar {
+  visibility: visible!important;
+}
+
+.videogular-container-center {
+  width:80%;
+  display:inline-block;
+  position: relative
+}
+
+.videogular-container-left {
+  width:9%;
+  display:inline-block;
+}
+
+.videogular-container-right {
+  width:9%;
+  display:inline-block;
+}
+
+
+
+
+/* Custom button */
+
+
+
+videogular my-titles-select,
+videogular my-help-select
+{
+    width: 50px;
+    display: table-cell;
+    vertical-align: middle;
+    text-align: right;
+    cursor: pointer;
+    color: white;
+    text-decoration: none;
+    position: relative;
+    top: 1px;
+}
+
+videogular my-titles-select {
+  right: 3px
+}
+
+
+videogular vg-show-about-screen{
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    position: absolute;
+    z-index: 2;
+    top: 0
+}
+
+videogular vg-show-speedrate{
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    right:0;
+    padding:10px;
+}
+
+#my-titles-list{
+  height: auto;
+  background: black;
+  position: absolute;
+  bottom:50px;
+  right:50px;
+  z-index: 10000000001;
+  
+}
+
+my-titles-select:hover #my-titles-list{
+  display:block
+}
+
+.myTitleStyle {
+  border:2px solid green;
+}
+
+
+#my-titles-list li{
+  text-align: center;
+  text-decoration: none;
+  list-style: none;
+  display:block;
+
+  text-transform: uppercase;
+  padding:5px 10px;
+
+}
+
+#my-titles-list li:hover{
+  background: gray;
+}
+
+videogular my-help-button:before {
+  font-family: 'Glyphicons Halflings';
+  content: "\e101";
+}
+
+videogular my-titles-select-button:before {
+  font-family: 'Glyphicons Halflings';
+  content: "\e188";
+}
+
+#videogular-wrapper {
+ position: relative;
+}
+
+#translate-box {
+  position: absolute;
+  min-width: 250px;
+  max-width: 400px;
+  height: 300px; /* Должно совпадать с TRBOXHEIGHT в videoplayer.js */
+  background-color: white;
+  z-index: 10000000000;
+  font-size: 1em;
+  border-radius: 3px;
+
+}
+
+#translate-box #box-pointer{
+  
+  content:''; 
+  border-top:10px solid #f5f5f5; 
+  border-left:10px solid transparent; 
+  border-right:10px solid transparent; 
+  position:absolute; 
+  left: 20px; 
+  bottom: -10px; 
+  z-index:  10000000000;
+}
+
+#translate-box #tr-header-text{
+  float:left;
+  font-weight: bold;
+  font-size: 1.2em
+}
+
+#translate-box .tr{
+  width: 100%;
+  margin-bottom: 3px;
+  padding: 3px;
+  min-height: 23px;
+}
+
+#translate-box .tr-direction{
+  text-align: center;
+  margin: 6px 0;
+
+}
+
+#translate-box .lang-change{
+  cursor: pointer;  
+}
+
+#translate-box .tr-full-info {
+  max-height: 170px;
+  overflow-y: scroll;
+
+}
+
+#translate-box .tr-direction, 
+#translate-box .lang-change {
+  background-color: darkcyan;
+  border: 0;
+}
+
+#translate-box .tr-direction span{
+  padding: 5px;
+  border-radius: 3px;
+}
+
+#translate-box .tr-from,
+#translate-box .tr-to
+{
+  border: 1px solid gray;
+  border-radius: 3px;
+}
+
+#translate-box .tr .text-to, 
+#translate-box .tr .text-from{
+ 
+}
+
+#translate-box .current-option {
+  color: white;
+  font-weight: bold;
+}
+
+#translate-box .retranslate-button{
+ 
+  text-align: center;
+  cursor: pointer;
+  display: inline-block;
+  float: right;
+}
+
+#translate-box .panel-heading {
+  text-align: right;
+  padding: 2px 10px;
+}
+
+#translate-box .ion-close{
+  cursor: pointer;
+}
+#translate-box .ion-close:hover {
+  color: red;
+}
+
+#translate-box .panel-body a {
+  white-space: nowrap; 
+}
+
+#translate-box .btn-group{
+  float:right;
+}
+
+#translate-box .panel-footer {
+  position: absolute;
+  bottom:0;
+  display:block;
+  width:100%;
+}
+
+
+
+#translate-box .text-from, 
+#translate-box .text-to {
+  font-weight: bold;
+  font-style: italic;
+  font-size: 1.0em;  
+  border: 0;
+  width: 100%;
+}
+
+.titles-wrapper{
+  position: absolute;
+  bottom: 50px;
+  left: 0;
+  width: 100%;
+  z-index: 10000000000;
+  text-align: center;
+}
+
+.text-titles {
+  background-color: rgba(50,50,50,0.8);  
+}
+
+.text-titles ul{
+  list-style: none;
+  font-family: sans-serif;
+  
+}
+
+.text-titles li{
+  line-height: 1.2em; 
+  font-size: 1.5em;
+
+}
+
+.text-titles li div{
+  padding: 5px;
+}
+
+.text-titles li span:hover{
+ 
+}
+
+.text-titles li span span:hover{
+  color: orange;
+  cursor: pointer
+}
+
+.one-track-0 {
+  color: antiquewhite
+}
+
+.one-track-1 {
+  color:chartreuse
+}
+
+.one-track-2 {
+  color:aqua
+}
+
+.one-track-3 {
+  color: white
+}
+
+.one-track-4 {
+  color: white
+}
+
+#mouseXY {
+  position:absolute;
+  top:0;
+  left:0;
+  color: white;
+  z-index: 1000000000000;
+}
+
+.li-with-no-style {
+  list-style: none;
+  margin-left: -20px;
+}
+
+#help-player-window {
+  position: absolute;
+  background-color: white;
+  z-index: 10000000000;
+  font-size: 1em;
+  border-radius: 3px;
+  padding:10px;
+  top:20px;
+  left:20px;
+  box-shadow: 0 0 50px 0 rgba(255, 255, 255, 0.56);
+  max-height: 250px;
+  max-width: 450px;
+  overflow-y:scroll; 
+}
+
+#help-player-window p {
+  margin: 2px 0;
+  font-size: 1em;
+}
+
+#help-player-window span.function{
+  font-weight: bold
+}
+
+#help-player-window span.function:after{
+  content: ' - '
+}
+
+@media screen and (max-width:800px){
+  .videogular-container-right{
+    width: 0
+  }
+  .videogular-container-left{
+    width: 0
+  }
+  .videogular-container-center{
+    width:100%
+  }
+  
+@media screen and (max-width:640px){  
+  vg-controls vg-time-display {
+    display:none!important
+  }
+  vg-controls my-help-select {
+     display:none!important
+  }
+}
